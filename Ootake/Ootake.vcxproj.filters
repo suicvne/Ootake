@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="resources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="headers">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ADPCM.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="App.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="AppEvent.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="APU.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioConfig.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioOut.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioOut9.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioOutX.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="Cartridge.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="CDInstall.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="CDInterface.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="CDROM.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="CPU.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="IntCtrl.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="JoyPad.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="MainBoard.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="MB128.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="Option.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="PadConfig.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="Printf.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="PSG.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="RecentRom.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="Resolution.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="Screen.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenD3D.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenDD.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="Startup.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="TocDB.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="VDC.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="WriteMemory.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ADPCM.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="App.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="AppEvent.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="APU.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioConfig.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioOut.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioOut9.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioOutX.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Cartridge.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CDInstall.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CDInterface.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CDROM.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CPU.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="IntCtrl.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="JoyPad.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MainBoard.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MB128.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Option.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="PadConfig.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Printf.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="PSG.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="RecentRom.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Resolution.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="resource1.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="resource2.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Screen.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenD3D.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenDD.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="SCSIDEFS.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Startup.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TocDB.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeDefs.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UNZIP32.H">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="VDC.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="WinMain.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="WNASPI32.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="WriteMemory.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Ootake.ico">
+      <Filter>resources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Ootake.rc">
+      <Filter>resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Ootake.exe.manifest">
+      <Filter>resources</Filter>
+    </Xml>
+  </ItemGroup>
+</Project>
