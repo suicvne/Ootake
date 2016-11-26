@@ -1,3 +1,5 @@
+//THIS  this has everything for the main emulator screen!
+
 /*-----------------------------------------------------------------------------
 	{WinMain.h]
 

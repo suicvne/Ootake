@@ -36,7 +36,7 @@ static HFONT		_hFontB; //ボタン用フォント
 
 static Uint32		_FontWidth;
 static Uint32		_FontHeight;
-static const char*	_pCaption = "To Enjoy \"Ootake\" Fully.";
+static const char*	_pCaption = "Ootake - Quickstart";
 static HINSTANCE	_hInstance = NULL;
 static HWND 		_hWnd = NULL;
 
@@ -92,13 +92,14 @@ get_font_width(
 }
 
 
+///This is a little misleading, this is more like an "update window bounds"
 static void
 set_window_size(
 	HWND			hWnd)
 {
 	RECT		rc;
 	Uint32		wndW = _FontWidth  * LINE_LEN +2;
-	Uint32		wndH = _FontHeight * N_LINES -2;
+	Uint32		wndH = 250;//_FontHeight * N_LINES -2;
 	Uint32		a;
 
 	SetRect(&rc, 0, 0, wndW, wndH);
@@ -129,32 +130,30 @@ update_window(
 	//SetBkColor(hDC, RGB(64,128,64));
 	//SetTextColor(hDC, RGB(240,240,240));
 	//hFont = (HFONT)GetStockObject(OEM_FIXED_FONT);
-	hFont = (HFONT)GetStockObject(OEM_CHARSET);
+	//hFont = (HFONT)GetStockObject(OEM_CHARSET);
+	hFont = _hFontB;
 	hFontOld = (HFONT)SelectObject(hDC, hFont);
 
 	x = _FontWidth*2 +1;
 	y = _FontHeight;
 
-	TextOut(hDC, x, y, "In English. A little firm talk before it starts.", 48);	y += _FontHeight;
-	TextOut(hDC, x, y, "Using ROM-image of the software not owned in oneself becomes an illegal act of lacking", 86);	y += _FontHeight;
-	TextOut(hDC, x, y, "propriety to the production of the software by the sweat of one's brow with love, and", 85);	y += _FontHeight;
-	TextOut(hDC, x, y, "use it with the software owned without fail, please. And, this is not a meaning that", 84);		y += _FontHeight;
-	TextOut(hDC, x, y, "recommends ROM-image of the software owned in oneself to be downloaded illegal.", 79);			y += _FontHeight;
+	TextOut(hDC, x, y, "Note before using Ootake", 24);	y += _FontHeight;
+	TextOut(hDC, x, y, "Using ROM images in Ootake that are not owned by you is illegal.", 64);	y += _FontHeight;
+	TextOut(hDC, x, y, "Please don't steal games that developers have worked hard on,", 61);	y += _FontHeight;
+	TextOut(hDC, x, y, "if you like the software consider purchasing it and a real PC Engine.", 69);		y += _FontHeight;
+	/*TextOut(hDC, x, y, "", 79);			y += _FontHeight;
 	y += _FontHeight;
-	TextOut(hDC, x, y, "It is a situation in which being not able to win the age though it is regrettable, and", 86);	y += _FontHeight;
-	TextOut(hDC, x, y, "exhausting the parts longevity of a \"PC Engine\" real machine every year, too progress.", 88);	y += _FontHeight;
-	TextOut(hDC, x, y, "I fortunately think that happiness is born even a little by this emulator.", 74);	y += _FontHeight;
+	TextOut(hDC, x, y, "", 86);	y += _FontHeight;
+	TextOut(hDC, x, y, "", 88);	y += _FontHeight;*/
+	TextOut(hDC, x, y, "Long live the PC Engine.", 24);	y += _FontHeight;
 
 	x = _FontWidth*46 + _FontWidth/2;
-	y += 11;
+	//y += 11;
 	TextOut(hDC, x  , y, "<- Please choose.", 17);							y += _FontHeight;
 	TextOut(hDC, x-1, y, "   [Put CD-ROM ahead of pushing button]", 39);
 
 	/* 終了処理 */
 	EndPaint(hWnd, &ps);
-	SelectObject(hDC, hFontOld);
-	DeleteObject(hFont);
-	ReleaseDC(hWnd, hDC);
 }
 
 
@@ -253,6 +252,7 @@ startup_wnd_proc(
 	{
 	case WM_CREATE:
 		EnableWindow(WINMAIN_GetHwnd(), FALSE);//メインウィンドウを無効化してモーダルに。
+		///THIS CREATES THE FONT FOR THE ACTUAL BUTTONS, NOT THE MANUAL GDI(?) DRAWING
 		_hFontB = CreateFont(  0,						// 高さ。0 = デフォルト
 		                       0,						// 幅。0なら高さに合った幅
     		                   0,						// 角度
@@ -265,12 +265,12 @@ startup_wnd_proc(
         		               0,						// 出力精度
             		           0,						// クリッピング精度
                 		       0,						// 出力品質
-                    		   0,						// ピッチとファミリー
-		                       TEXT("Segoe UI")						// 書体名
+                    		   FF_DONTCARE,						// ピッチとファミリー
+		                       NULL						// 書体名
 							); //英語のデフォルトフォントに設定
 		_FontWidth	= get_font_width(hWnd);
 		//_FontHeight = get_font_height(hWnd);
-		_FontHeight = 16;
+		_FontHeight = 22;
 		set_window_size(hWnd);
 		break;
 
@@ -347,7 +347,9 @@ startup_wnd_proc(
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
-
+/**
+Main initialization of the form, buttons and whatnot.
+*/
 static BOOL
 startup_main()
 {
@@ -395,7 +397,7 @@ startup_main()
 
 	//ボタンを作成
 	x = _FontWidth*2 +1;
-	y = _FontHeight*10 +3;
+	y = _FontHeight*6;
 	hWndTmp = CreateWindow(
 		"BUTTON", "\"&CD-ROM\" Game",
 		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,

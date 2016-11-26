@@ -110,6 +110,7 @@ static void
 set_window_size(
 	HWND			hWnd)
 {
+	/*
 	RECT		rc;
 	Uint32		wndW = _FontWidth  * LINE_LEN +_FontWidth;
 	Uint32		wndH = _FontHeight * N_LINES +_FontHeight/2 -1;
@@ -120,7 +121,7 @@ set_window_size(
 	wndW = rc.right - rc.left;
 	wndH = rc.bottom - rc.top;
 	GetWindowRect(STARTUP_GetHwnd(), &rc);
-	MoveWindow(hWnd, rc.left, rc.bottom - wndH, wndW, wndH, TRUE);
+	MoveWindow(hWnd, rc.left, rc.bottom - wndH, wndW, wndH, TRUE);*/
 }
 
 
@@ -138,31 +139,30 @@ update_window(
 	/* 描画準備 */
 	hDC = BeginPaint(hWnd, &ps);
 	SetBkMode(hDC, OPAQUE);	//文字の背景を塗りつぶす
-	SetBkColor(hDC, RGB(64,128,64));
-	SetTextColor(hDC, RGB(240,240,240));
-	hFont = (HFONT)GetStockObject(OEM_FIXED_FONT);
+	SetBkColor(hDC, RGB(255,255,255));
+	SetTextColor(hDC, RGB(0,0,0));
+	//hFont = (HFONT)GetStockObject(OEM_FIXED_FONT);
+	hFont = _hFontB;
 	hFontOld = (HFONT)SelectObject(hDC, hFont);
 
 	x = _FontWidth*2 +1;
 	y = _FontHeight/2;
-	TextOut(hDC, x, y, "Important Setting  重要な設定", 29);
+	TextOut(hDC, x, y, "General Settings", 16);
 	y += _FontHeight*9 +1;
 	TextOut(hDC, x, y, "Push button, and Explanation is displayed.", 42);
 	y += _FontHeight;
-	TextOut(hDC, x, y, "ボタンを押すと説明も表示されます。", 34);
 
 	y = _FontHeight*13 -1;
-	TextOut(hDC, x, y, "Video Setting  ビデオ環境の設定", 31);
+	TextOut(hDC, x, y, "Video Settings", 14);
 	y += _FontHeight*5;
-	TextOut(hDC, x, y, "Sound Setting  サウンド環境の設定", 33);
+	TextOut(hDC, x, y, "Sound Settings", 14);
 
 	/* 終了処理 */
 	EndPaint(hWnd, &ps);
-	SelectObject(hDC, hFontOld);
-	DeleteObject(hFont);
-	ReleaseDC(hWnd, hDC);
+	//SelectObject(hDC, hFontOld);
+	//DeleteObject(hFont);
+	//ReleaseDC(hWnd, hDC);
 }
-
 
 static LRESULT CALLBACK
 option_wnd_proc(
@@ -190,11 +190,12 @@ option_wnd_proc(
         		               0,						// 出力精度
             		           0,						// クリッピング精度
                 		       0,						// 出力品質
-                    		   0,						// ピッチとファミリー
-		                       ""						// 書体名
+							   FF_DONTCARE,						// ピッチとファミリー
+		                       NULL						// 書体名
 							); //英語のデフォルトフォントに設定
 		_FontWidth	= get_font_width(hWnd);
-		_FontHeight = get_font_height(hWnd);
+		//_FontHeight = get_font_height(hWnd);
+		_FontHeight = 22;
 		set_window_size(hWnd);
 		break;
 
@@ -242,14 +243,7 @@ option_wnd_proc(
 					"automatically to match the sound to the picture.    \n"
 					"The set completion is about 60 seconds. Please close other heavy    \n"
 					"applications for an accurate measurement now. This automatic    \n"
-					"setting starts when \"Yes\" is pushed.    \n"
-					"\n"
-					"In Japanese language\n"
-					"お使いのパソコン環境において、絵とCD音源（CD-DA,ADPCM）のズレ   \n"
-					"が起こらないように、タイミング値を自動設定します。\n"
-					"設定完了まで約60秒間掛かります。その間、Ootakeを処理落ちさせない   \n"
-					"ために、他の重いアプリケーションは閉じてください。\"はい\"を押すと、   \n"
-					"自動設定を開始します。",
+					"setting starts when \"Yes\" is pushed.    \n",
 					"About \"CD-DA Play Timing\" Setting", MB_YESNO);
 				if (bOk == IDYES)
 				{
@@ -287,16 +281,7 @@ option_wnd_proc(
 						"While playing a game, the menu (click on the game screen)    \n"
 						"[Audio -> Adjust CD-DA (for Sync) -> Adjust CD-DA Auto Set]    \n"
 						"can be used to set this setting.    \n"
-						"If there is a gap of CD-DA, please use it.    \n"
-						"\n"
-						"In Japanese language\n"
-						"この設定は、ゲーム中メニュー（ゲーム画面をクリック）の   \n"
-						"「Audio -> Adjust CD-DA (for Sync) -> Adjust CD-DA Auto Set」   \n"
-						"からも設定することができます。音ズレがあった場合、再設定してみて   \n"
-						"ください。   \n"
-						"※ゲームによっては、実機でも音ズレしているものがあります。   \n"
-						"　Ootake側が原因のゲームな場合、お知らせくだされば、可能な限り   \n"
-						"　ですが、修正いたします。   ",
+						"If there is a gap of CD-DA, please use it.    \n",
 						"About \"CD-DA Play Timing\" Setting", MB_OK);
 					if (APP_GetFullScreen()) //フルスクリーンモードだった場合、デスクトップ表示へ戻す。
 					{
@@ -321,17 +306,7 @@ option_wnd_proc(
 					"Function Button + [SELECT] button -> Shooting of Screenshots    \n"
 					"Function Button + Up,Down,Left,Right -> Audio Volume control    \n"
 					"+ Operate while Pressing the Function Button    \n"
-					"Press \"Yes\" button, and Setup-Screen appears.    \n\n"
-					"In Japanese language\n"
-					"Ootakeは、ジョイパッド上に\"ファンクションボタン\"を設定できます。   \n"
-					"[ 左手人差し指で押すボタン（例えばPS型ならL2ボタン）をファンク   \n"
-					"  ションボタンに設定すると、手元で色々設定できるので便利です。]   \n"
-					"ファンクションボタン＋ Iボタン or IIボタン…「連射設定の切替」   \n"
-					"ファンクションボタン＋ RUNボタン…「ゲームの切替」   \n"
-					"ファンクションボタン＋ SELECTボタン…「スクリーンショット保存」   \n"
-					"ファンクションボタン＋ 十字キー…「音量の調節」   \n"
-					"※上記の操作は、ファンクションボタンを押しながら操作します。   \n"
-					"「はい」を押すと設定画面が出ますので、ボタンを押してください。   \n",
+					"Press \"Yes\" button, and Setup-Screen appears.    \n\n",
 					"About \"Function Button\" Setting", MB_YESNO);
 				if (bOk == IDYES)
 				{
@@ -350,16 +325,7 @@ option_wnd_proc(
 					"[2 button pad],[3 button pad],and [6 button pad], please set it.    \n"
 					"+In real machine, [RUN] or [SELECT] either is selected at    \n"
 					" [III]button of [3 button pad]. In Ootake, set [IIIr]button and    \n"
-					" [IIIs]button, and they can be used at the same time.    \n\n"
-					"In Japanese language\n"
-					"PCエンジン（実機）には、「２ボタン」「３ボタン」「６ボタン」の   \n"
-					"３種類のゲームパッドが存在します。   \n"
-					"Ootakeでは、ボタン設定を３種類別々に設定し、別々に保存します。   \n"
-					"「はい」を押すと設定画面が出ますので、「２ボタン」「３ボタン」   \n"
-					"「６ボタン」の順に３種類ぶん、ボタンを押して設定してください。   \n"
-					"※「３ボタンパッド」は、実機では３ボタン目が「RUN,SELECTどちら   \n"
-					"　かを切り替えて使用」でしたが、Ootakeでは、RUNとSELECTを別々   \n"
-					"　にそれぞれを「IIIrボタン,IIIsボタンとして設定」します。   \n",
+					" [IIIs]button, and they can be used at the same time.    \n\n",
 					"About \"PCE-Pad Controller\" Setting", MB_YESNO);
 				if (bOk == IDYES)
 				{
@@ -386,14 +352,7 @@ option_wnd_proc(
 						"For the setting of 2-5 players, click the    \n"
 						"[Input -> Configure Pad #2-#5] menu.    \n"
 						"(The menu appears when you click on the game screen during    \n"
-						"game play.)    \n\n"
-						"In Japanese language\n"
-						"パッド設定が完了しました。   \n"
-						"なお、２人～５人プレイ対応のゲームでは、パソコンにゲームパッドを   \n"
-						"複数つなげるか、キーボードの利用で、実機同様のプレイができます。   \n"
-						"２～５プレイヤーのコントローラー設定は、ゲーム中メニュー（ゲーム   \n"
-						"画面をクリックすると出ます）の右から２つ目にある   \n"
-						"「Input -> Configure Pad #2-#5」メニューから行ってください。   ",
+						"game play.)    \n\n",
 						"About \"PCE-Pad Controller\" Setting", MB_OK);
 				}
 				break;
@@ -412,18 +371,7 @@ option_wnd_proc(
 					"If you want to automatically turn on the \"Resume Mode\" in all    \n"
 					"of the games, press [Yes]button(at bottom of this window).    \n"
 					"If you want to manually turn on(off) to each game, press    \n"
-					"[No]button(at bottom of this window).    \n"
-					"\n"
-					"In Japanese language\n"
-					"Ootakeは、ゲーム終了時に自動でステートセーブを行う「レジューム機能」   \n"
-					"があります。次回のゲーム開始時に、前回終了した続きからプレイでき、   \n"
-					"サウンド音量や連射等の設定も、ゲーム毎に読み込まれます。   \n"
-					"「レジューム機能」は、レジューム機能を使いたいゲームをプレイ中に、   \n"
-					"メニュー（ゲーム画面をクリック）から、[File -> Set Resume]メニューを   \n"
-					"選択してチェックを入れることでオンにできます。   \n"
-					"全てのゲームで「レジューム機能」を自動的にオンにしたい場合は、   \n"
-					"下の「はい」を押してください。上記のように手動でゲーム毎にオンオフ   \n"
-					"したい場合は、「いいえ」を押してください。   ",
+					"[No]button(at bottom of this window).    \n",
 					"About \"Resume(Auto Save) Mode\" Setting", MB_YESNO);
 				if (bOk == IDYES)
 					APP_SetAutoResumeMode(TRUE);
@@ -481,19 +429,21 @@ option_main()
 	HWND		hWndTmp;
 	char		pCaption[64];
 	
-	strcpy_s(pCaption, 64, "\"Ootake v");
+	strcpy_s(pCaption, 64, "Ootake v");
 	strcat_s(pCaption, 64, APP_GetSoftVersionChar());
-	strcat_s(pCaption, 64, "\" Setting");
+	strcat_s(pCaption, 64, " Settings");
 	
 	ZeroMemory(&wc, sizeof(wc));
-	wc.style		 = 0;
+	
+	//wc.
+	//wc.style		 = 0;
 	wc.lpfnWndProc	 = option_wnd_proc;
 	wc.cbClsExtra	 = 0;
 	wc.cbWndExtra	 = 0;
 	wc.hInstance	 = _hInstance;
 	wc.hIcon		 = LoadIcon(_hInstance, MAKEINTRESOURCE(OOTAKEICON)); //アイコンを読み込み。v2.00更新
 	wc.hCursor		 = LoadCursor(NULL, IDC_ARROW);
-	_hMyb = CreateSolidBrush(RGB(64,128,64)); //ブラシを作る
+	_hMyb = CreateSolidBrush(RGB(255,255,255));
 	wc.hbrBackground = _hMyb;
 	wc.lpszMenuName  = "";
 	wc.lpszClassName = _pCaption;
@@ -501,14 +451,15 @@ option_main()
 	if (RegisterClass(&wc) == 0)
 		return FALSE;
 
+
 	hWnd = CreateWindow(
 		_pCaption,
 		pCaption,
 		WS_SYSMENU | WS_CAPTION,
-		CW_USEDEFAULT,
-		CW_USEDEFAULT,
-		0,
-		0,
+		200,
+		200,
+		400,
+		550,
 		STARTUP_GetHwnd(),
 		NULL,
 		_hInstance,
@@ -529,7 +480,7 @@ option_main()
 		x, y, _FontWidth*38, _FontHeight*2-3,
 		_hWnd, (HMENU)BUTTON_CDDATIMING, _hInstance, NULL
 	);
-	SendMessage(hWndTmp, WM_SETFONT, (WPARAM)_hFontB, MAKELPARAM(TRUE, 0));//フォントを設定
+	SendMessage(hWndTmp, WM_SETFONT, (WPARAM)_hFontB, MAKELPARAM(TRUE, 0));
 
 	//Helpボタンを作成
 	x += _FontWidth*40;
@@ -545,7 +496,7 @@ option_main()
 	x = _FontWidth*2;
 	y += _FontHeight*2;
 	hWndTmp = CreateWindow(
-		"BUTTON", "Set Function-Button",
+		"BUTTON", "Set Function-Buttons",
 		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
 		x, y, _FontWidth*38, _FontHeight*2-3,
 		_hWnd, (HMENU)BUTTON_FUNCKEY, _hInstance, NULL
@@ -555,7 +506,7 @@ option_main()
 	//PadConfigボタンを作成
 	y += _FontHeight*2;
 	hWndTmp = CreateWindow(
-		"BUTTON", "Set Button of PCE-Pad Controller",
+		"BUTTON", "Configure Controller",
 		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
 		x, y, _FontWidth*38, _FontHeight*2-3,
 		_hWnd, (HMENU)BUTTON_PADCONFIG, _hInstance, NULL

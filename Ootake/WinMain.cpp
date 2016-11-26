@@ -41,7 +41,7 @@ Copyright(C)2006-2016 Kitao Nakamura.
 #define _CRT_SECURE_NO_DEPRECATE
 
 #define _WIN32_WINNT 0x0400 //WM_MOUSEWHEEL使用のため必要
-#define DIRECTINPUT_VERSION	0x0500	//Kitao追加。環境にもよるかもしれないが、DirectInput5が軽い。7だとやや遅延あり。スペースハリアーがわかりやすい。
+#define DIRECTINPUT_VERSION	0x0800	//Kitao追加。環境にもよるかもしれないが、DirectInput5が軽い。7だとやや遅延あり。スペースハリアーがわかりやすい。
 
 #include <windows.h>
 #include <stdio.h>
@@ -54,6 +54,9 @@ Copyright(C)2006-2016 Kitao Nakamura.
 #include "App.h"
 #include "Input.h"
 #include "Printf.h"
+
+//for enabling visual styles
+#pragma comment(linker,"\"/manifestdependency:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
 static BOOL _bBreakTrap; //Kitao追加。デバッグ用
 

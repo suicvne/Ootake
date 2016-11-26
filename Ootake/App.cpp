@@ -136,7 +136,7 @@ static FuncDwmEnableComposition _FuncDwmEnableComposition;
 
 
 static char		_AppName[100] = MAINCAPTION; //Kitao追加。Windowに表示するアプリ名
-static char		_SoftVersion[5] = "2.78"; //Kitao追加。バージョン情報。5バイト(4文字)固定。
+static char		_SoftVersion[5] = "2.79"; //Kitao追加。バージョン情報。5バイト(4文字)固定。
 
 static BOOL		_bInit = FALSE;//Kitao追加。初期設定が完了したらTRUE
 static BOOL		_bWindows9x = FALSE; //Kitao追加。OSが98/Me/95ならTRUE。v1.36
@@ -245,7 +245,7 @@ static BOOL		_bResolutionAutoChange	= FALSE; //Kitao追加。v1.35
 static BOOL		_bFullScreen			= FALSE;
 static double 	_GammaValue				= 1.340; //Kitao追加。v1.41更新
 static Sint32	_BrightValue			= 1; //Kitao追加。v1.41
-static Sint32	_ScanLineType			= 1; //Kitao追加。0…ノンスキャンライン，1…縦横スキャンライン，2…横のみスキャンライン，3…横のみスキャンラインシャープ，4…TVスキャンライン。5…ノンスキャンラインシャープ。6…ノンスキャンラインTV。7…縦横スキャンラインモアシャープ。8…縦横スキャンラインモーストシャープ。v2.63からデフォルトを1に。v2.78更新
+static Sint32	_ScanLineType			= 6; //6 is non-scanlined by default
 static Sint32	_ScreenshotScanLineType	= 2; //Kitao追加。スクリーンショット時のスキャンラインタイプ。-1の場合、プレイ中と同じ(_ScanLineTypeの値を使用)。デフォルトは静止画で綺麗な2(＆Sizeはx2)。
 static Sint32	_ScanLineDensity		= 70; //Kitao追加。v1.09。v2.35からデフォルトは30%にした。v2.64からデフォルトを70%にした。
 static BOOL		_bOptimizeGamma			= TRUE; //Kitao追加。スキャンラインの濃度に応じてガンマを最適化するならTRUE。v2.35
@@ -5139,7 +5139,7 @@ APP_Init(
 			}
 		}
 
-		if (_bWindows8) _bStartFullScreen = TRUE; //Windows8以降はウィンドウモードだと大きな遅延があるので、フルスクリーンモードをデフォルトとする。v2.77
+		if (_bWindows8) _bStartFullScreen = FALSE; //Windows8以降はウィンドウモードだと大きな遅延があるので、フルスクリーンモードをデフォルトとする。v2.77
 	}
 
 	SetThreadExecutionState(ES_SYSTEM_REQUIRED | ES_CONTINUOUS); //Kitao追加。スタンバイを一時的無効に。環境によってジョイパッド操作でスタンバイ抑止が出来ない場合に必要。v2.22
@@ -9818,14 +9818,12 @@ handle_event(
 			MAINBOARD_Pause(TRUE);
 			WINMAIN_ShowCursor(TRUE);
 			screenUpdate(); //メニューやダイアログ表示などで黒くなった部分を再描画。
-			sprintf(buf, "\"Ootake\" Version %s\n\nCopyright(C)2006-2016 Kitao Nakamura.   \n"
-						 "Copyright(C)2004-2005 Ki.(PC2E code)\n\nThis program is not guaranteed.\n"
-						 "Please use it by the self-responsibility.\n"
-						 "Business use is prohibited.\n\n"
-						 "In Japanese language\n"
-						 "このプログラムは無保証です。\n"
-						 "各自の責任にてご利用ください。\n"
-						 "商的な利用は禁じます。", _SoftVersion);
+			sprintf(buf, "\"Ootake\" Version %s\n\nCopyright (C) 2006-2016 Kitao Nakamura.   \n"
+						 "Copyright (C) 2004-2005 Ki.(PC2E code)\n"
+					     "Copyright (C) 2016 Mike Santiago (Cleanup)\n"
+						 "\nThis program is not under any warranty.\n"
+						 "Please use responsibly.\n"
+						 "Business use is prohibited.", _SoftVersion);
 			MessageBox(WINMAIN_GetHwnd(), buf, "About \"Ootake\"", MB_OK);
 			run_emulator(bRunNormalState);
 			break;
